@@ -1,0 +1,25 @@
+{
+  "name": "reachhigh",
+  "version": "1.0.0",
+  "description": "A digitized platform that helps in building a personalized career plan",
+  "main": "server.js",
+  "engines": {
+    "node": "10.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NedyUdombat/ReachHigh.git"
+  },
+  "keywords": [
+    "ReachHigh"
+  ],
+  "author": "Edidiong Nedy Udombat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NedyUdombat/ReachHigh/issues"
+  },
+  "homepage": "https://github.com/NedyUdombat/ReachHigh#readme"
+}

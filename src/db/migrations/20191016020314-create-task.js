@@ -7,6 +7,11 @@ export default {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      goalId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'goal_id',
+      },
       title: {
         type: Sequelize.STRING,
       },

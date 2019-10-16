@@ -2,6 +2,10 @@ export default (sequelize, DataTypes) => {
   const Task = sequelize.define(
     'Task',
     {
+      goalId: {
+        type: DataTypes.INTEGER,
+        field: 'goal_id',
+      },
       title: {
         type: DataTypes.STRING,
       },

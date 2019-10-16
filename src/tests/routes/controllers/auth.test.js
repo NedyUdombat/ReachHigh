@@ -6,7 +6,6 @@ import {
   signupCredentials,
   signupCredentialsWithShortUsername,
   userWithExistingEmail,
-  loginDetails,
   loginDetailsWithWrongEmail,
   loginDetailsWithWrongPassword,
   loginDetailsWithoutEmail,

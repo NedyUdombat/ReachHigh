@@ -27,7 +27,7 @@ export const generateToken = async (payload, expiresIn = '30days') =>
  * @param {*} data
  * @returns {object} res
  */
-export const successResponse = (res, statusCode, message, data) =>
+export const successResponse = (res, statusCode, message, data = {}) =>
   res.status(statusCode).json({
     status: 'success',
     message,
@@ -42,7 +42,7 @@ export const successResponse = (res, statusCode, message, data) =>
  * @param {*} errors
  * @returns {object} res
  */
-export const errorResponse = (res, statusCode, message, errors) =>
+export const errorResponse = (res, statusCode, message, errors = {}) =>
   res.status(statusCode).json({
     status: 'error',
     message,
@@ -137,3 +137,17 @@ export function excludeProperty(obj, keys) {
   const filteredKeys = Object.keys(obj).filter(key => !keys.includes(key));
   return pick(obj, filteredKeys);
 }
+
+/**
+ *
+ * @param {string} token
+ * @returns {object/null} decoded tokens
+ */
+export const verifyToken = async token => {
+  return await jwt.verify(token, SECRET_KEY, (err, data) => {
+    if (err) {
+      return null;
+    }
+    return data;
+  });
+};

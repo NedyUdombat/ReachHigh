@@ -21,6 +21,12 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'goalId',
       as: 'tasks',
     });
+    Goal.belongsToMany(models.User, {
+      foreignKey: 'goal_id',
+      otherKey: 'user_id',
+      through: 'UserGoals',
+      as: 'userGoals',
+    });
   };
   return Goal;
 };

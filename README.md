@@ -113,7 +113,7 @@ version 3 =  *{HOST}/api/v3/*
 
 ### Registration:
 
-`POST /api/v1/register`
+`POST /api/v1/auth/register`
 
 Example request body:
 
@@ -133,7 +133,7 @@ Required fields: `email`, `username`, `password`
 
 ### Authentication:
 
-`POST /api/v1/login`
+`POST /api/v1/auth/login`
 
 Example request body:
 

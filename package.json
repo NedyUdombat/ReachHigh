@@ -22,7 +22,7 @@
     ]
   },
   "scripts": {
-    "pretest": "npm run prettier",
+    "pretest": "npm run prettier && npm run db:migrate:test",
     "test": "NODE_ENV=test nyc mocha --recursive src/tests --require @babel/register --exit",
     "build": "rm -rf dist && babel src -d dist",
     "start": "node dist/app.js",
@@ -30,7 +30,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "db:migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "db:migrate:testdb": "NODE_ENV=test npm run db:migrate",
+    "db:migrate:test": "NODE_ENV=test npm run db:migrate",
     "prettier": "prettier --write '**/*.{js,jsx}'",
     "lint": "node_modules/eslint/bin/eslint.js src --fix"
   },
@@ -78,6 +78,8 @@
     "cors": "2.8.5",
     "dotenv": "8.1.0",
     "express": "4.17.1",
+    "joi": "14.3.1",
+    "jsonwebtoken": "8.5.1",
     "pg": "7.12.1",
     "pg-hstore": "2.3.3",
     "sequelize": "5.19.6",

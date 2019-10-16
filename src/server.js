@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+import router from './routes';
+
 const app = express();
 
 // enable use of dotenv config file.
@@ -16,6 +18,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to ReachHigh!' });
 });
+
+app.use('/api/v1', router);
 
 app.all('*', (req, res) =>
   res.status(404).json({

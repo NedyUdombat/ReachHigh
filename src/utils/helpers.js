@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Op } from 'sequelize';
 
@@ -83,3 +84,56 @@ export const checkDuplicateUser = async (email, username) => {
     },
   });
 };
+
+/**
+ *
+ *
+ * @export
+ * @param {string} password
+ * @param {number} [salt=10]
+ * @returns {string} hash
+ */
+export const hashPassword = async (password, salt = 10) => {
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
+};
+
+/**
+ * @description Compare Password
+ *
+ * @export
+ * @param {string} hashedPassword
+ * @param {string} password
+ * @returns {boolean} true/false
+ */
+export const comparePassword = async (hashedPassword, password) =>
+  bcrypt.compareSync(password, hashedPassword);
+
+/**
+ *
+ *
+ * @param {object} obj
+ * @param {array} keys
+ * @returns {object} filteredObject
+ */
+export function pick(obj, keys) {
+  return keys
+    .map(key => (key in obj ? { [key]: obj[key] } : {}))
+    .reduce(
+      (finalObject, arrayOfObjects) =>
+        Object.assign(finalObject, arrayOfObjects),
+      {},
+    );
+}
+
+/**
+ *
+ *
+ * @param {object} obj
+ * @param {array} keys
+ * @returns {object} filteredObject
+ */
+export function excludeProperty(obj, keys) {
+  const filteredKeys = Object.keys(obj).filter(key => !keys.includes(key));
+  return pick(obj, filteredKeys);
+}

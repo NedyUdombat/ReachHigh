@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
+import { register, login } from '../controllers/auth';
 import { validateNewUser } from '../middlewares/validate-input';
 import { duplicateUserValidation } from '../middlewares/auth';
-import { register } from '../controllers/auth';
 
 const authRouter = Router();
 
@@ -12,5 +12,7 @@ authRouter.post(
   duplicateUserValidation,
   register,
 );
+
+authRouter.post('/login', login);
 
 export default authRouter;

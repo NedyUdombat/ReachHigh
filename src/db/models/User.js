@@ -37,9 +37,11 @@ export default (sequelize, DataTypes) => {
     },
   );
   User.associate = models => {
-    User.hasMany(models.Goal, {
-      foreignKey: 'userId',
-      as: 'goals',
+    User.belongsToMany(models.Goal, {
+      foreignKey: 'user_id',
+      otherKey: 'goal_id',
+      through: 'UserGoals',
+      as: 'userGoals',
     });
   };
 

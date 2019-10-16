@@ -5,6 +5,7 @@ import {
   generateToken,
   hashPassword,
   comparePassword,
+  verifyToken,
 } from '../../utils/helpers';
 
 chai.use(chaiHttp);
@@ -13,10 +14,23 @@ const { expect } = chai;
 let hashedPassword;
 
 describe('HELPERS MODULE', () => {
-  context('Generate token', () => {
+  context('Token', () => {
+    let result;
     it('should generate a token', async () => {
-      const result = await generateToken({ id: 22 });
+      result = await generateToken({ id: 22 });
       expect(result).to.be.a('String');
+    });
+
+    it('should verify a token', async () => {
+      const verifiedToken = await verifyToken(result);
+      expect(verifiedToken).to.be.an('Object');
+    });
+
+    it('should throw an error if token verification is not valid', async () => {
+      const failedTokenResult = await verifyToken(
+        'gsdvcbhc.acwudsbvbwdbufjc2w3dqwf2we',
+      );
+      expect(failedTokenResult).to.eql(null);
     });
   });
 

@@ -8,6 +8,7 @@ export const signupCredentials = {
   email: 'roses@gmail.com',
   password: '16goingOn17',
   username: 'flowergarden',
+  id: 1,
 };
 
 export const signupCredentialsWithShortUsername = {

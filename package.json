@@ -12,7 +12,10 @@
     "start": "node dist/app.js",
     "watch": "NODE_ENV=development nodemon --exec babel-node src/server.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "cat coverage/lcov.info | coveralls"
+    "coveralls": "cat coverage/lcov.info | coveralls",
+    "db:migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
+    "db:migrate:testdb": "NODE_ENV=test npm run db:migrate",
+    "prettier": "prettier --write '**/*.{js,jsx}'"
   },
   "repository": {
     "type": "git",
@@ -48,8 +51,13 @@
     "prettier": "1.18.2"
   },
   "dependencies": {
+    "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dotenv": "8.1.0",
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "pg": "7.12.1",
+    "pg-hstore": "2.3.3",
+    "sequelize": "5.19.6",
+    "sequelize-cli": "5.5.1"
   }
 }

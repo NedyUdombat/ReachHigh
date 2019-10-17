@@ -30,7 +30,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "db:migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "db:migrate:test": "NODE_ENV=test npm run db:migrate",
+    "db:migrate:test": "NODE_ENV=test npm run db:migrate && NODE_ENV=test sequelize db:seed:undo:all && NODE_ENV=test sequelize db:seed:all",
     "prettier": "prettier --write '**/*.{js,jsx}'",
     "lint": "node_modules/eslint/bin/eslint.js src --fix"
   },

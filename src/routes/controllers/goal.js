@@ -5,7 +5,7 @@ import {
 } from '../../utils/helpers';
 import models from '../../db/models';
 
-const { Goal, UserGoal } = models;
+const { Goal, UserGoal, Task } = models;
 
 /**
  * Select A Goal
@@ -34,4 +34,25 @@ export const selectGoal = async (req, res) => {
   } catch (err) {
     return serverError(res);
   }
+};
+
+/**
+ * Get All Goals
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} goals Array
+ */
+export const getAllGoals = async (req, res) => {
+  const goals = await Goal.findAll({
+    include: [
+      {
+        model: Task,
+        as: 'tasks',
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+      },
+    ],
+  });
+  return successResponse(res, 200, 'Successfully retrieved all goals', {
+    goals,
+  });
 };

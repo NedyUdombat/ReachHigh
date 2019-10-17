@@ -66,4 +66,27 @@ describe('Goal Selection', () => {
       );
     });
   });
+
+  context('Get all goals', () => {
+    it('should return all goals', async () => {
+      const res = await chai
+        .request(app)
+        .get('/api/v1/goal')
+        .set('x-access-token', await generateToken(signupCredentials));
+      expect(res.status).to.equal(200);
+      expect(res.body)
+        .to.have.property('message')
+        .to.be.a('String');
+      expect(res.body)
+        .to.have.property('status')
+        .to.eql('success');
+      expect(res.body.message).to.eql('Successfully retrieved all goals');
+      expect(res.body)
+        .to.have.property('data')
+        .to.be.an('Object');
+      expect(res.body.data)
+        .to.have.property('goals')
+        .to.be.an('array');
+    });
+  });
 });

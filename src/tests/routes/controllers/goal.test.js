@@ -29,7 +29,7 @@ describe('Goal Selection', () => {
         .request(app)
         .post('/api/v1/goal/1/select')
         .set('x-access-token', await generateToken(signupCredentials));
-      expect(res.status).to.equal(204);
+      expect(res.status).to.equal(201);
     });
 
     it('should through an error if goal does not exist', async () => {

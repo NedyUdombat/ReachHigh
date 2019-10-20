@@ -31,7 +31,7 @@ export const selectGoal = async (req, res) => {
       goal.tasks.forEach(async task => {
         await UserTask.destroy({ where: { userId: id, taskId: task.id } });
       });
-      return successResponse(res, 204, 'Successfully de-selected this goal');
+      return successResponse(res, 201, 'Successfully de-selected this goal');
     }
     const userGoals = await UserGoal.create({ userId: id, goalId });
     goal.tasks.forEach(async task => {
@@ -46,20 +46,15 @@ export const selectGoal = async (req, res) => {
 };
 
 /**
- * Get All Goals
+ * Get All Users Goals
  * @param {object} req
  * @param {object} res
  * @returns {object} goals Array
  */
-export const getAllGoals = async (req, res) => {
-  const goals = await Goal.findAll({
-    include: [
-      {
-        model: Task,
-        as: 'tasks',
-        attributes: { exclude: ['createdAt', 'updatedAt'] },
-      },
-    ],
+export const getAllUserGoals = async (req, res) => {
+  const { user } = req;
+  const goals = await UserGoal.findAll({
+    where: { userId: user.id },
   });
   return successResponse(res, 200, 'Successfully retrieved all goals', {
     goals,

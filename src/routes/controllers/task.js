@@ -69,3 +69,34 @@ export const getAllUserTasks = async (req, res) => {
     return serverError(res);
   }
 };
+
+export const getSingleTask = async (req, res) => {
+  const { taskId } = req.params;
+  const { id } = req.user;
+  console.log(id);
+  try {
+    const task = await Task.findOne({
+      where: { id: taskId },
+      include: [
+        {
+          model: Goal,
+          as: 'goal',
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
+        },
+        {
+          model: UserTask,
+          where: { userId: id },
+          as: 'tasks',
+          attributes: {
+            exclude: ['userId', 'taskId', 'createdAt', 'updatedAt'],
+          },
+        },
+      ],
+    });
+    return successResponse(res, 200, 'Successfully retrieved task', {
+      task,
+    });
+  } catch (err) {
+    return serverError(res);
+  }
+};

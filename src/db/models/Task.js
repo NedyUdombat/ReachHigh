@@ -31,6 +31,10 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'goalId',
       as: 'goal',
     });
+    Task.hasMany(models.UserTask, {
+      foreignKey: 'taskId',
+      as: 'tasks',
+    });
   };
   return Task;
 };

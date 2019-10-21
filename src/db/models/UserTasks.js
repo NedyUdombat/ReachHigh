@@ -29,6 +29,15 @@ export default (sequelize, DataTypes) => {
     },
     {},
   );
-  UserTask.associate = models => {};
+  UserTask.associate = models => {
+    UserTask.belongsTo(models.Task, {
+      foreignKey: 'taskId',
+      as: 'taskDetails',
+    });
+    UserTask.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'usersTasks',
+    });
+  };
   return UserTask;
 };
